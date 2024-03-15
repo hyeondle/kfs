@@ -12,7 +12,7 @@ kernel.o: kernel.c
 	$(CC) $(CFLAGS) -c kernel.c -o kernel.o
 
 boot.o: boot.s
-	$(NASM) $(NASMFLAGS) boot.s -o boot.s
+	$(NASM) $(NASMFLAGS) boot.s -o boot.o
 
 mykernel.bin: kernel.o boot.o link.ld
 	$(LD) $(LDFLAGS) -o mykernel.bin boot.o kernel.o
@@ -24,4 +24,7 @@ mykernel.iso: mykernel.bin
 	grub-mkrescue -o mykernel.iso isodir
 
 clean:
-	rm- rf *.o mykernel.bin mykernel.iso isodir
+	rm -rf *.o mykernel.bin isodir
+
+fclean: clean
+	rm -rf mykernel.iso
