@@ -1,19 +1,32 @@
-section .multiboot
-align 4
-dd 0x1BADB002		; multiboot header
-dd 0x00			; flag
-dd -(0x1BADB002 + 0x00)	; checksum
+.set BOOTHEAD,	0x1BADB002
+.set FLAGS,	0
+.set CHECKSUM, -(BOOTHEAD + FLAGS)
 
-extern kernel_main
+.section .multiboot
 
-section .text
-global _start
+.long BOOTHEAD
+.long FLAGS
+.long CHECKSUM
+
+# set stack's bottom
+stackBottom:
+# define maximum size of stack to 512 bytes
+.skip 1024
+
+stackTop:
+
+.section .text
+.global _start
+.type _start, @function
+
 _start:
-	cli			; disable interrupt
-	mov esp, kernel_stack
-	call kernel_main
-	hlt			; stop cpu
 
-section .bss
-resb 4096		; kernel stack
-kernel_stack:
+	mov $stackTop, %esp
+	call kernel_entry
+	cli
+
+hltLoop:
+	hlt
+	jmp hltLoop
+
+.size _start, . - _start
