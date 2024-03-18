@@ -30,3 +30,5 @@ hltLoop:
 	jmp hltLoop
 
 .size _start, . - _start
+
+.section .note.GNU-stack,"",@progbits

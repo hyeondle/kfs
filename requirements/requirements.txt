@@ -1,4 +1,6 @@
 mtools (mformati: to make iso image)
 xorriso (to make grub iso image)
+grub-pc-bin (fxxking CAN'T READ FROM CDROM occurs when this not installed)
+
 
 qemu-system (to run iso as virtual)

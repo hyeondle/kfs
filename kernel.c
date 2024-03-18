@@ -55,5 +55,11 @@ void p(const char* str)
 
 void kernel_entry()
 {
-	p("Begin of kfs\nHOHOKHORKO");
+	//p("Begin of kfs\nHOHOKHORKO");
+	
+	init_vga(WHITE, BLACK);
+	vga_buffer[0] = vga_entry('t', WHITE, BLACK);
+	vga_buffer[1] = vga_entry('e', WHITE, BLACK);
+	vga_buffer[2] = vga_entry('s', WHITE, BLACK);
+	vga_buffer[3] = vga_entry('t', WHITE, BLACK);
 }

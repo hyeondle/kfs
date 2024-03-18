@@ -3,7 +3,7 @@ NASM=nasm
 AS=as
 LD=ld
 
-CFLAGS= -m32 -std=gnu99 -ffreestanding -O2 -Wall -Wextra
+CFLAGS= -m32 -std=gnu99 -ffreestanding -O2 -Wall -Wextra -fno-builtin -fno-stack-protector -nostdlib -nodefaultlibs
 NASMFLAGS= -f elf32
 ASFLAGS=--32
 LDFLAGS= -m elf_i386 -T link.ld
